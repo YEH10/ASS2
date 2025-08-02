@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Handling - Button and Rectangle</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    #rectangle {
+      width: 100px;
+      height: 80px;
+      background-color: red;
+      position: absolute;
+    }
+    #moveBtn {
+      margin-bottom: 20px;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="moveBtn">Move Rectangle</button>
+  <div id="rectangle"></div>
+
+  <script>
+    const rectangle = document.getElementById("rectangle");
+    const button = document.getElementById("moveBtn");
+
+    const positions = [
+      {bottom: "20px", left: "20px"}, // Bottom Left
+      {bottom: "20px", right: "20px"}, // Bottom Right
+      {top: "20px", right: "20px"}, // Top Right
+      {top: "20px", left: "20px"} // Top Left
+    ];
+
+    const colors = ["red", "green", "blue", "orange"];
+
+    let index = 0;
+
+    function moveRectangle() {
+      // Reset position
+      rectangle.style.top = "";
+      rectangle.style.right = "";
+      rectangle.style.bottom = "";
+      rectangle.style.left = "";
+
+      // Apply new position
+      const pos = positions[index];
+      for (let key in pos) {
+        rectangle.style[key] = pos[key];
+      }
+
+      // Apply new color
+      rectangle.style.backgroundColor = colors[index];
+
+      // Update index
+      index = (index + 1) % positions.length;
+    }
+
+    button.addEventListener("click", moveRectangle);
+    
+    // Initialize at starting position
+    moveRectangle();
+  </script>
+</body>
+</html>
